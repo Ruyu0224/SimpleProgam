@@ -1,4 +1,4 @@
 # SimpleProgam
 lys
 a simple java code 
-ecolgy incoming interface to  NC system
+weaver incoming interface to NC system
