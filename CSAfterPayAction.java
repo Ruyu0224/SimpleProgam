@@ -27,49 +27,48 @@ import weaver.soa.workflow.request.Row;
 
 /**
  * 
- * @author profe 2019Äê11ÔÂ18ÈÕ
- *  ºó¸¶¿îÁ÷³Ì¸¶¿î½Ó¿Ú
+ * @author profe 2019å¹´11æœˆ18æ—¥
+ *  åä»˜æ¬¾æµç¨‹ä»˜æ¬¾æ¥å£
  */
 public class CSAfterPayAction extends BaseAction {
 
 	private static Logger logger = LoggerFactory.getLogger(CSAfterPayAction.class);
-	// ËùÊô¼¯ÍÅ,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String
+	// æ‰€å±é›†å›¢,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String
 		private static final String pk_group="06";
-		//Ó¦¸¶²ÆÎñ×éÖ¯,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String
+		//åº”ä»˜è´¢åŠ¡ç»„ç»‡,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String
 		private static final String pk_org="220307000000";
-		//ÊÇ·ñºì³å¹ı,×î´ó³¤¶ÈÎª1,ÀàĞÍÎª:UFBoolean
+		//æ˜¯å¦çº¢å†²è¿‡,æœ€å¤§é•¿åº¦ä¸º1,ç±»å‹ä¸º:UFBoolean
 		private static final String isreded="N";
-		//µ¥¾İÀàĞÍ±àÂë,×î´ó³¤¶ÈÎª50,ÀàĞÍÎª:String
+		//å•æ®ç±»å‹ç¼–ç ,æœ€å¤§é•¿åº¦ä¸º50,ç±»å‹ä¸º:String
 		private static final String pk_billtype="F3";
-		//Ó¦¸¶ÀàĞÍcode,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String
+		//åº”ä»˜ç±»å‹code,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String
 		private static final String pk_tradetype="F3-Cxx-01";
-		//µ¥¾İ´óÀà,×î´ó³¤¶ÈÎª2,ÀàĞÍÎª:String
+		//å•æ®å¤§ç±»,æœ€å¤§é•¿åº¦ä¸º2,ç±»å‹ä¸º:String
 		private static final String billclass="fk";
-		//¸½¼şÕÅÊı,×î´ó³¤¶ÈÎª0,ÀàĞÍÎª:Integer
+		//é™„ä»¶å¼ æ•°,æœ€å¤§é•¿åº¦ä¸º0,ç±»å‹ä¸º:Integer
 		private static final Integer accessorynum=0;
-		//ÊÇ·ñÁ÷³Ìµ¥¾İ,×î´ó³¤¶ÈÎª1,ÀàĞÍÎª:UFBoolean
+		//æ˜¯å¦æµç¨‹å•æ®,æœ€å¤§é•¿åº¦ä¸º1,ç±»å‹ä¸º:UFBoolean
 		private static final String isflowbill="N";
-		//ÆÚ³õ±êÖ¾,×î´ó³¤¶ÈÎª1,ÀàĞÍÎª:UFBoolean
+		//æœŸåˆæ ‡å¿—,æœ€å¤§é•¿åº¦ä¸º1,ç±»å‹ä¸º:UFBoolean
 		private static final String isinit="N";
-		//µ¥¾İËùÊôÏµÍ³,×î´ó³¤¶ÈÎª0,ÀàĞÍÎª:Integer
+		//å•æ®æ‰€å±ç³»ç»Ÿ,æœ€å¤§é•¿åº¦ä¸º0,ç±»å‹ä¸º:Integer
 		private static final Integer syscode=0;
-		//µ¥¾İÀ´Ô´ÏµÍ³,×î´ó³¤¶ÈÎª0,ÀàĞÍÎª:Integer
+		//å•æ®æ¥æºç³»ç»Ÿ,æœ€å¤§é•¿åº¦ä¸º0,ç±»å‹ä¸º:Integer
 		private static final Integer src_syscode=0;
-		//µ¥¾İ×´Ì¬,×î´ó³¤¶ÈÎª0,ÀàĞÍÎª:Integer
+		//å•æ®çŠ¶æ€,æœ€å¤§é•¿åº¦ä¸º0,ç±»å‹ä¸º:Integer
 		private  static final Integer billstatus = 0;
-		//ÖÆµ¥ÈË,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String
+		//åˆ¶å•äºº,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String
 		private static final String billmaker="OAFK";
-		//ÉúĞ§×´Ì¬,×î´ó³¤¶ÈÎª0,ÀàĞÍÎª:Integer
+		//ç”Ÿæ•ˆçŠ¶æ€,æœ€å¤§é•¿åº¦ä¸º0,ç±»å‹ä¸º:Integer
 		private static final Integer effectstatus=0;
-		//ÊÕ»õ¹ú,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String
+		//æ”¶è´§å›½,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String
 		private static final String rececountryid="CN";
-		//±¨Ë°¹ú,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String
+		//æŠ¥ç¨å›½,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String
 		private static final String taxcountryid="CN";
 		
 		private static final String pk_balatype="005";
 		private static final String RESULT_CODE="1";
-		private static final String webserviceurl="http://10.10.2.5:9088/api/Domain/ydpubesb/sendWsTools?wsdl";
-		private static final String backString="http://192.168.120.52:9081/service/XChangeServlet?account=0001&groupcode=06&operator=1007A1100000000NMBBB";
+		
 	@Override
 	public String execute(RequestInfo requestInfo) {
 		Date date=new Date();
@@ -96,16 +95,16 @@ public class CSAfterPayAction extends BaseAction {
 			String field=prop[i].getName();
 			if(field.equals("lcbh")) {
 				billid=Util.null2String(prop[i].getValue());
-				logger.info("Á÷³Ì±àºÅ:"+billid);
+				logger.info("æµç¨‹ç¼–å·:"+billid);
 				
 			}
 			if(field.equals("skhjje")) {
 				sumskje=new BigDecimal(Util.null2String(prop[i].getValue()));
-				logger.info("ÊÕ¿î½ğ¶îºÏ¼Æ:"+sumskje);
+				logger.info("æ”¶æ¬¾é‡‘é¢åˆè®¡:"+sumskje);
 			}
 			if(field.equals("ncpaycode")) {
 				ncpaycode=Util.null2String(prop[i].getValue());
-				logger.info("NC¸¶¿î±àºÅ:"+ncpaycode);
+				logger.info("NCä»˜æ¬¾ç¼–å·:"+ncpaycode);
 						
 			}
 			
@@ -254,16 +253,16 @@ public class CSAfterPayAction extends BaseAction {
 		stringBuilder.append("<creditorreference></creditorreference>");
 		stringBuilder.append("<bodys>");
 		
-		logger.info("»ñÈ¡Ã÷Ï¸±íÊı¾İ");
+		logger.info("è·å–æ˜ç»†è¡¨æ•°æ®");
         DetailTableInfo detailTableInfo = requestInfo.getDetailTableInfo();
         DetailTable[] detailTables = detailTableInfo.getDetailTable();
-        logger.info("Ã÷Ï¸±íÊıÁ¿:"+detailTables.length);
+        logger.info("æ˜ç»†è¡¨æ•°é‡:"+detailTables.length);
 
 
 
-		//»ñÈ¡ÊÕ¿îĞÅÏ¢Ã÷Ï¸
+		//è·å–æ”¶æ¬¾ä¿¡æ¯æ˜ç»†
 		DetailTable receDetailTable=detailTables[1];
-		//»ñÈ¡ÊÕ¿îÃ÷Ï¸ĞĞ
+		//è·å–æ”¶æ¬¾æ˜ç»†è¡Œ
 		Row[] receRows=receDetailTable.getRow();
 		
 
@@ -273,19 +272,19 @@ public class CSAfterPayAction extends BaseAction {
 					String recefield=rececell.getName();
 					if(recefield.equals("bm")) {
 						supplier=Util.null2String(rececell.getValue());
-						logger.info("±àÂë:"+supplier);
+						logger.info("ç¼–ç :"+supplier);
 					}
 					if(recefield.equals("zhxz")) {
 						natureaccount=Util.null2String(rececell.getValue());
-						logger.info("ÕË»§ĞÔÖÊ:"+natureaccount);
+						logger.info("è´¦æˆ·æ€§è´¨:"+natureaccount);
 					}
 					if(recefield.equals("skje")){
 						skje=new BigDecimal(Util.null2String(rececell.getValue()));
-						logger.info("ÊÕ¿î½ğ¶î:"+skje);
+						logger.info("æ”¶æ¬¾é‡‘é¢:"+skje);
 					}
 					if (recefield.equals("skzh")) {
 						recaccount=Util.null2String(rececell.getValue());
-						logger.info("ÊÕ¿îÕË»§:"+recaccount);
+						logger.info("æ”¶æ¬¾è´¦æˆ·:"+recaccount);
 					}
 				}
 				
@@ -299,7 +298,7 @@ public class CSAfterPayAction extends BaseAction {
 				stringBuilder.append("<pu_deptid></pu_deptid>");
 				stringBuilder.append("<prepay>0</prepay>");
 				stringBuilder.append("<material></material>");
-				if (natureaccount.equals("¸öÈË")) {
+				if (natureaccount.equals("ä¸ªäºº")) {
 					stringBuilder.append("<supplier></supplier>");
 				}else {
 				    stringBuilder.append("<supplier>"+supplier+"</supplier>");
@@ -329,10 +328,10 @@ public class CSAfterPayAction extends BaseAction {
 				stringBuilder.append("<pk_paybill></pk_paybill>");
 				stringBuilder.append("<pk_subjcode></pk_subjcode>");
 				stringBuilder.append("<billno></billno>");
-				if (natureaccount.equals("¸öÈË")) {
+				if (natureaccount.equals("ä¸ªäºº")) {
 					stringBuilder.append("<objtype>3</objtype>");
 				}
-				if(natureaccount.equals("¹©Ó¦ÉÌ")){
+				if(natureaccount.equals("ä¾›åº”å•†")){
 					stringBuilder.append("<objtype>1</objtype>");
 				}
 				stringBuilder.append("<rowno>0</rowno>");
@@ -342,10 +341,10 @@ public class CSAfterPayAction extends BaseAction {
 				stringBuilder.append("<pk_ssitem></pk_ssitem>");
 				stringBuilder.append("<scomment>"+remark+"</scomment>");
 				stringBuilder.append("<subjcode></subjcode>");
-				stringBuilder.append("<pk_currtype>ÈËÃñ±Ò</pk_currtype>");
+				stringBuilder.append("<pk_currtype>äººæ°‘å¸</pk_currtype>");
 				stringBuilder.append("<rate>0.00000000</rate>");
 				stringBuilder.append("<pk_deptid>"+pk_deptid+"</pk_deptid>");
-				if (natureaccount.equals("¹©Ó¦ÉÌ")) {
+				if (natureaccount.equals("ä¾›åº”å•†")) {
 					stringBuilder.append("<pk_psndoc></pk_psndoc>");
 				}else {
 				    stringBuilder.append("<pk_psndoc>"+supplier+"</pk_psndoc>");
@@ -451,10 +450,10 @@ public class CSAfterPayAction extends BaseAction {
 		stringBuilder.append("<pk_currtype></pk_currtype>");
 		stringBuilder.append("<pk_subjcode></pk_subjcode>");
 		stringBuilder.append("<pk_balatype></pk_balatype>");
-		if (natureaccount.equals("¸öÈË")) {
+		if (natureaccount.equals("ä¸ªäºº")) {
 			stringBuilder.append("<objtype>3</objtype>");
 		}
-		if(natureaccount.equals("¹©Ó¦ÉÌ")){
+		if(natureaccount.equals("ä¾›åº”å•†")){
 			stringBuilder.append("<objtype>1</objtype>");
 		}
 		stringBuilder.append("<payaccount></payaccount>");
@@ -480,10 +479,10 @@ public class CSAfterPayAction extends BaseAction {
 				}
 				
 				String code=list.get(2);
-				logger.info("NCÓ¦¸¶µ¥ºÅ:"+code);
+				logger.info("NCåº”ä»˜å•å·:"+code);
 				String requestid = requestInfo.getRequestid();
 				String ncsql="update formtable_main_548 set ncpaycode="+"'"+code+"'"+" where requestid="+requestid;
-				logger.info("¸üĞÂÓ¦¸¶µ¥ºÅsqlÓï¾ä:"+ncsql);
+				logger.info("æ›´æ–°åº”ä»˜å•å·sqlè¯­å¥:"+ncsql);
 		        RecordSet recordSet=new RecordSet();
 		        recordSet.executeUpdate(ncsql);
 				
@@ -504,7 +503,7 @@ public class CSAfterPayAction extends BaseAction {
             document = DocumentHelper.parseText(xmldata);
             list = new ArrayList<String>();
             Element root = document.getRootElement();
-            Element memberElm=root.element("sendresult");// "member"ÊÇ½ÚµãÃû
+            Element memberElm=root.element("sendresult");// "member"æ˜¯èŠ‚ç‚¹å
             @SuppressWarnings("unchecked")
 			Iterator<Element> ment = memberElm.elementIterator();
             while (ment.hasNext()) {
@@ -521,7 +520,7 @@ public class CSAfterPayAction extends BaseAction {
             }
 
         } catch (DocumentException e) {
-            logger.error("´íÎóĞÅÏ¢£º"+e.getMessage(),e);
+            logger.error("é”™è¯¯ä¿¡æ¯ï¼š"+e.getMessage(),e);
         }
         return list;
     }
