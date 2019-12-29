@@ -34,7 +34,7 @@ import weaver.soa.workflow.request.Row;
  * @author sxq
  * 
  * @date  2019-09-05
-    *   ³£ÊìÀ×ÔÊÉÏ(Í¨ÓÃ)Ó¦¸¶±¨ÏúÁ÷³Ì
+    *   å¸¸ç†Ÿé›·å…ä¸Š(é€šç”¨)åº”ä»˜æŠ¥é”€æµç¨‹
  *
  */
 public class CSPayControllAction extends BaseAction  {
@@ -75,8 +75,7 @@ public class CSPayControllAction extends BaseAction  {
 	
 	private static final String RESULT_CODE="1";
 	
-	private static final String webserviceurl="http://10.10.2.5:9088/api/Domain/ydpubesb/sendWsTools?wsdl";
-	private static final String backString="http://192.168.120.52:9081/service/XChangeServlet?account=0001&groupcode=06";
+	
 	@Override
 	public String execute(RequestInfo requestInfo) {
 		Date date=new Date();
@@ -99,11 +98,11 @@ public class CSPayControllAction extends BaseAction  {
 		BigDecimal taxmoney=new BigDecimal(0);
 		BigDecimal skje=new BigDecimal(0);
 		BigDecimal money=new BigDecimal(0);
-        //ÊÕ¿î½ğ¶î
+        //æ”¶æ¬¾é‡‘é¢
 		BigDecimal sumskje=new BigDecimal(0);
-       //³åÏú½ğ¶î
+       //å†²é”€é‡‘é¢
 		BigDecimal sumcxje=new BigDecimal(0);
-        //Êµ¸¶½ğ¶î
+        //å®ä»˜é‡‘é¢
 		//BigDecimal sumsfje=new BigDecimal(0);
 		
 		BigDecimal rate=new BigDecimal(0);
@@ -118,29 +117,29 @@ public class CSPayControllAction extends BaseAction  {
 			String field=prop[i].getName();
 			if(field.equals("lcbh")) {
 				billid=Util.null2String(prop[i].getValue());
-				logger.info("Á÷³Ì±àºÅ:"+billid);
+				logger.info("æµç¨‹ç¼–å·:"+billid);
 			}
 			if(field.equals("sfje")) {
 				money=new BigDecimal(Util.null2String(prop[i].getValue()));
-				logger.info("Êµ¸¶½ğ¶î:"+money);
+				logger.info("å®ä»˜é‡‘é¢:"+money);
 				
 			}
-			//Ë°½ğºÏ¼Æ
+			//ç¨é‡‘åˆè®¡
 			if(field.equals("bxje")) {
 				sumskje=new BigDecimal(Util.null2String(prop[i].getValue()));
-				logger.info("º¬Ë°½ğ¶îºÏ¼Æ:"+sumskje);
+				logger.info("å«ç¨é‡‘é¢åˆè®¡:"+sumskje);
 			}
 			
 			if (field.equals("tax")) {
 				sumcxje=new BigDecimal(Util.null2String(prop[i].getValue()));
-				logger.info("³åÏú½ğ¶îºÏ¼Æ:"+sumcxje);
+				logger.info("å†²é”€é‡‘é¢åˆè®¡:"+sumcxje);
 			}
 			if(field.equals("ncyfcode")) {
 				ncyfcode=Util.null2String(prop[i].getValue());
 			}
 		}
 		if(!ncyfcode.equals("")) {
-			logger.info("Èç¹ûÒÑÓĞ¸¶¿îµ¥ºÅ£¬Ôò²»´«NC");
+			logger.info("å¦‚æœå·²æœ‰ä»˜æ¬¾å•å·ï¼Œåˆ™ä¸ä¼ NC");
 			return SUCCESS;
 		}
 		
@@ -198,10 +197,10 @@ public class CSPayControllAction extends BaseAction  {
 		stringBuilder.append("<taxcountryid>"+taxcountryid+"</taxcountryid>");
 		stringBuilder.append("<bodys>");
 		
-		logger.info("»ñÈ¡Ã÷Ï¸±í");
+		logger.info("è·å–æ˜ç»†è¡¨");
         DetailTableInfo detailTableInfo = requestInfo.getDetailTableInfo();
         DetailTable[] detailTables = detailTableInfo.getDetailTable();
-        logger.info("»ñÈ¡Ã÷Ï¸±íÊıÁ¿:"+detailTables.length);
+        logger.info("è·å–æ˜ç»†è¡¨æ•°é‡:"+detailTables.length);
    
 		DetailTable costdetailTable=detailTables[0];
 	    
@@ -219,29 +218,29 @@ public class CSPayControllAction extends BaseAction  {
 					subid=Util.null2String(costcell.getValue());
 					String []sub=subid.split("_");
 					subjectcode=sub[1];
-					logger.info("ÈëÕË¿ÆÄ¿±àÂë:"+subjectcode);
+					logger.info("å…¥è´¦ç§‘ç›®ç¼–ç :"+subjectcode);
 				}
 			    if (costfield.equals("abstract")) {
 					remark=Util.null2String(costcell.getValue());
-					logger.info("ÕªÒª:"+remark);
+					logger.info("æ‘˜è¦:"+remark);
 				}
 			    if(costfield.equals("costdept")) {
 			    	String deptid=Util.null2String(costcell.getValue());
 			    	String[]dept=deptid.split("_");
 			    	pk_deptid=dept[1];
-			    	logger.info("·ÑÓÃ²¿ÃÅ±àÂë:"+pk_deptid);
+			    	logger.info("è´¹ç”¨éƒ¨é—¨ç¼–ç :"+pk_deptid);
 			    }
 			    if(costfield.equals("mx1sqje")) {
 			    	ratemoney=new BigDecimal(Util.null2String(costcell.getValue()));
-			    	logger.info("º¬Ë°½ğ¶î:"+ratemoney);
+			    	logger.info("å«ç¨é‡‘é¢:"+ratemoney);
 			    }
 			    if (costfield.equals("mx1sqjenotax")) {
 					noratemoney=new BigDecimal(Util.null2String(costcell.getValue()));
-					logger.info("ÎŞË°½ğ¶î:"+noratemoney);
+					logger.info("æ— ç¨é‡‘é¢:"+noratemoney);
 				}
 			    if(costfield.equals("mx1tax")) {
 			    	taxmoney=new BigDecimal(Util.null2String(costcell.getValue()));
-			    	logger.info("Ë°½ğ:"+taxmoney);
+			    	logger.info("ç¨é‡‘:"+taxmoney);
 			    }
 			    if(costfield.equals("taxrate")) {
 			    	taxrate=new Integer(Util.null2String(costcell.getValue()));
@@ -269,31 +268,31 @@ public class CSPayControllAction extends BaseAction  {
 			    }
 			   
 			}
-			 logger.info("Ë°ĞòÁĞ:"+taxrate);
-			 logger.info("Ë°ÂÊ:"+tax);
-			 logger.info("Ë°Âë:"+taxnum);
+			 logger.info("ç¨åºåˆ—:"+taxrate);
+			 logger.info("ç¨ç‡:"+tax);
+			 logger.info("ç¨ç :"+taxnum);
 			for (Row recerow : receRows) {
-				//»ñÈ¡ÊÕ¿îÃ÷Ï¸µ¥ÔªÊı¾İ
-				logger.info("»ñÈ¡ÊÕ¿îÃ÷Ï¸Êı¾İ");
+				//è·å–æ”¶æ¬¾æ˜ç»†å•å…ƒæ•°æ®
+				logger.info("è·å–æ”¶æ¬¾æ˜ç»†æ•°æ®");
 				Cell[] receCells=recerow.getCell();
 						
 				for (Cell rececell : receCells) {
 					String recefield=rececell.getName();
 					if(recefield.equals("mxgysbm")) {
 						supplier=Util.null2String(rececell.getValue());
-						logger.info("±àÂë:"+supplier);
+						logger.info("ç¼–ç :"+supplier);
 					}
 					if(recefield.equals("yhszd")) {
 						natureaccount=Util.null2String(rececell.getValue());
-						logger.info("ÕË»§ĞÔÖÊ:"+natureaccount);
+						logger.info("è´¦æˆ·æ€§è´¨:"+natureaccount);
 					}
 					if(recefield.equals("mx3skje")){
 						skje=new BigDecimal(Util.null2String(rececell.getValue()));
-						logger.info("ÊÕ¿î½ğ¶î:"+skje);
+						logger.info("æ”¶æ¬¾é‡‘é¢:"+skje);
 					}
 					if (recefield.equals("mx3skzh")) {
 						recaccount=Util.null2String(rececell.getValue());
-						logger.info("ÊÕ¿îÕËºÅ:"+recaccount);
+						logger.info("æ”¶æ¬¾è´¦å·:"+recaccount);
 					}
 					
 				}
@@ -306,7 +305,7 @@ public class CSPayControllAction extends BaseAction  {
 				stringBuilder.append("<pu_org></pu_org>");
 				stringBuilder.append("<sett_org>"+pk_org+"</sett_org>");
 				stringBuilder.append("<material></material>");
-				if (natureaccount.equals("¸öÈË")) {
+				if (natureaccount.equals("ä¸ªäºº")) {
 					stringBuilder.append("<supplier></supplier>");
 				}else {
 				    stringBuilder.append("<supplier>"+supplier+"</supplier>");
@@ -332,10 +331,10 @@ public class CSPayControllAction extends BaseAction  {
 				stringBuilder.append("<busidate>"+nowdate+"</busidate>");
 				stringBuilder.append("<pk_subjcode></pk_subjcode>");
 				stringBuilder.append("<billno></billno>");
-				if (natureaccount.equals("¸öÈË")) {
+				if (natureaccount.equals("ä¸ªäºº")) {
 					stringBuilder.append("<objtype>3</objtype>");
 				}
-				if(natureaccount.equals("¹©Ó¦ÉÌ")){
+				if(natureaccount.equals("ä¾›åº”å•†")){
 					stringBuilder.append("<objtype>1</objtype>");
 				}
 				stringBuilder.append("<rowno>0</rowno>");
@@ -344,10 +343,10 @@ public class CSPayControllAction extends BaseAction  {
 				stringBuilder.append("<checktype></checktype>");
 				stringBuilder.append("<scomment>"+remark+"</scomment>");
 				stringBuilder.append("<subjcode>"+subjectcode+"</subjcode>");
-				stringBuilder.append("<pk_currtype>ÈËÃñ±Ò</pk_currtype>");
+				stringBuilder.append("<pk_currtype>äººæ°‘å¸</pk_currtype>");
 				stringBuilder.append("<rate>"+taxmoney+"</rate>");
 				stringBuilder.append("<pk_deptid>"+pk_deptid+"</pk_deptid>");
-				if (natureaccount.equals("¹©Ó¦ÉÌ")) {
+				if (natureaccount.equals("ä¾›åº”å•†")) {
 					stringBuilder.append("<pk_psndoc></pk_psndoc>");
 				}else {
 				    stringBuilder.append("<pk_psndoc>"+supplier+"</pk_psndoc>");
@@ -475,15 +474,15 @@ public class CSPayControllAction extends BaseAction  {
 		stringBuilder.append("<pk_deptid></pk_deptid>");
 		stringBuilder.append("<pk_psndoc></pk_psndoc>");
 		stringBuilder.append("<supplier></supplier>");
-		stringBuilder.append("<pk_currtype>ÈËÃñ±Ò</pk_currtype>");
+		stringBuilder.append("<pk_currtype>äººæ°‘å¸</pk_currtype>");
 		stringBuilder.append("<payaccount></payaccount>");
 		stringBuilder.append("<recaccount></recaccount>");
 		stringBuilder.append("<pk_balatype></pk_balatype>");
 		
-		if (natureaccount.equals("¸öÈË")) {
+		if (natureaccount.equals("ä¸ªäºº")) {
 			stringBuilder.append("<objtype>3</objtype>");
 		}
-		if(natureaccount.equals("¹©Ó¦ÉÌ")){
+		if(natureaccount.equals("ä¾›åº”å•†")){
 			stringBuilder.append("<objtype>1</objtype>");
 		}
 		stringBuilder.append("<ispuadjust>N</ispuadjust>");
@@ -506,10 +505,10 @@ public class CSPayControllAction extends BaseAction  {
 		            return FAILURE_AND_CONTINUE;
 				}
 				String code=(String) list.get(2);
-				logger.info("NCÓ¦¸¶µ¥ºÅ:"+code);
+				logger.info("NCåº”ä»˜å•å·:"+code);
 				String requestid = requestInfo.getRequestid();
 				String ncsql="update formtable_main_600 set ncyfcode="+"'"+code+"'"+" where requestid="+requestid;
-				logger.info("¸üĞÂÓ¦¸¶µ¥ºÅsqlÓï¾ä:"+ncsql);
+				logger.info("æ›´æ–°åº”ä»˜å•å·sqlè¯­å¥:"+ncsql);
 		        RecordSet recordSet=new RecordSet();
 		        recordSet.executeUpdate(ncsql);
 		        
@@ -532,7 +531,7 @@ public class CSPayControllAction extends BaseAction  {
 	            document = DocumentHelper.parseText(xmldata);
 	            list = new ArrayList<String>();
 	            Element root = document.getRootElement();
-	            Element memberElm=root.element("sendresult");// "member"ÊÇ½ÚµãÃû
+	            Element memberElm=root.element("sendresult");// "member"æ˜¯èŠ‚ç‚¹å
 	            @SuppressWarnings("unchecked")
 				Iterator<Element> ment = memberElm.elementIterator();
 	            while (ment.hasNext()) {
@@ -549,7 +548,7 @@ public class CSPayControllAction extends BaseAction  {
 	            }
 
 	        } catch (DocumentException e) {
-	            logger.error("´íÎóĞÅÏ¢£º"+e.getMessage(),e);
+	            logger.error("é”™è¯¯ä¿¡æ¯ï¼š"+e.getMessage(),e);
 	        }
 	        return list;
 	    }
